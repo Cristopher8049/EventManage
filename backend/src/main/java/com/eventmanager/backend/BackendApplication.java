@@ -2,8 +2,13 @@ package com.eventmanager.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = "com.eventmanager.backend.infrastructure.adapter.outbound.persistence")
+@EntityScan(basePackages           = "com.eventmanager.backend.infrastructure.adapter.outbound.persistence")
 public class BackendApplication {
 
     public static void main(String[] args) {
