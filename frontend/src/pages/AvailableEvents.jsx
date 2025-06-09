@@ -3,16 +3,35 @@ import { useState, useEffect } from "react";
 
 export default function AvailableEvents() {
     const [events, setEvents] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Aquí puedes hacer fetch real desde el backend
-        // Simulación temporal:
-        const fakeEvents = [
-            { id: 1, title: "Hackathon UCB", date: "2025-07-01" },
-            { id: 2, title: "Congreso de Tecnología", date: "2025-08-15" },
-        ];
-        setEvents(fakeEvents);
+        fetch("http://localhost:8080/api/events")
+            .then((res) => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then((data) => {
+                const mapped = data.map((e) => ({
+                    id: e.id,
+                    title: e.title,
+                    date: new Date(e.startDateTime).toLocaleDateString(),
+                }));
+                setEvents(mapped);
+            })
+            .catch((err) => {
+                console.error("Error al cargar eventos:", err);
+                setError("No se pudieron cargar los eventos.");
+            });
     }, []);
+
+    if (error) {
+        return (
+            <div className="min-h-screen p-8 bg-gray-100">
+                <p className="text-red-600">{error}</p>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen p-8 bg-gray-100">
@@ -25,7 +44,10 @@ export default function AvailableEvents() {
                         key={event.id}
                         className="p-4 bg-white rounded shadow hover:shadow-lg transition"
                     >
-                        <Link to={`/events/${event.id}`} className="text-gray-600 font-semibold text-xl">
+                        <Link
+                            to={`/events/${event.id}`}
+                            className="text-gray-900 font-semibold text-xl"
+                        >
                             {event.title}
                         </Link>
                         <p className="text-gray-600">Fecha: {event.date}</p>
