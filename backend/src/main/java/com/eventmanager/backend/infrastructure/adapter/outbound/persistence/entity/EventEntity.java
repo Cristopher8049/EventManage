@@ -1,12 +1,11 @@
-package com.eventmanager.backend.infrastructure.adapter.outbound.persistence;
+package com.eventmanager.backend.infrastructure.adapter.outbound.persistence.entity;
 
-import com.eventmanager.backend.domain.model.EventStatus;
+import com.eventmanager.backend.domain.model.event.EventStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

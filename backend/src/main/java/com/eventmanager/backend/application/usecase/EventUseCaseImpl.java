@@ -2,7 +2,7 @@ package com.eventmanager.backend.application.usecase;
 
 import com.eventmanager.backend.application.port.inbound.EventUseCase;
 import com.eventmanager.backend.application.port.outbound.EventRepository;
-import com.eventmanager.backend.domain.model.Event;
+import com.eventmanager.backend.domain.model.event.Event;
 import com.eventmanager.backend.domain.exception.BusinessException;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,7 @@ public class EventUseCaseImpl implements EventUseCase {
                 .filter(e -> e.getTitle().equalsIgnoreCase(event.getTitle()))
                 .findAny()
                 .ifPresent(e -> { throw new BusinessException("Título ya existe"); });
+        event.setCreatedAt(LocalDateTime.now());
         return repository.save(event);
     }
 

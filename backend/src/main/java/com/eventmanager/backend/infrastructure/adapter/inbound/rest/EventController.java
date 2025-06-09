@@ -1,7 +1,7 @@
 package com.eventmanager.backend.infrastructure.adapter.inbound.rest;
 
 import com.eventmanager.backend.application.port.inbound.EventUseCase;
-import com.eventmanager.backend.domain.model.Event;
+import com.eventmanager.backend.domain.model.event.Event;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +38,6 @@ public class EventController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Event> update(@PathVariable UUID id, @RequestBody Event event) {
-        // opcional: asegurarse de que el ID del body coincida con el path
         event.setId(id);
         Event updated = service.update(event);
         return ResponseEntity.ok(updated);

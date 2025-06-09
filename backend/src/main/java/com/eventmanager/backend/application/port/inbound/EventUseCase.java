@@ -1,6 +1,6 @@
 package com.eventmanager.backend.application.port.inbound;
 
-import com.eventmanager.backend.domain.model.Event;
+import com.eventmanager.backend.domain.model.event.Event;
 
 import java.util.List;
 import java.util.Optional;

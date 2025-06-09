@@ -1,4 +1,4 @@
-package com.eventmanager.backend.domain.model;
+package com.eventmanager.backend.domain.model.event;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

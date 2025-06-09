@@ -1,7 +1,9 @@
 package com.eventmanager.backend.infrastructure.adapter.outbound.persistence;
 
 import com.eventmanager.backend.application.port.outbound.EventRepository;
-import com.eventmanager.backend.domain.model.Event;
+import com.eventmanager.backend.domain.model.event.Event;
+import com.eventmanager.backend.infrastructure.adapter.outbound.persistence.entity.EventEntity;
+import com.eventmanager.backend.infrastructure.adapter.outbound.persistence.jpa.SpringDataJpaEventRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
