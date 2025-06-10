@@ -30,6 +30,7 @@ public class EventRepositoryAdapter implements EventRepository {
         evt.setStatus(e.getStatus());
         evt.setCreatedAt(e.getCreatedAt());
         evt.setUpdatedAt(e.getUpdatedAt());
+        evt.setMaxCapacity(e.getMaxCapacity());
         return evt;
     }
 
