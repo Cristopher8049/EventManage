@@ -4,14 +4,28 @@ import EventForm from "../components/EventForm";
 export default function CreateEvent() {
     const navigate = useNavigate();
 
-    const handleAddEvent = (newEvent) => {
-        // Aquí luego conectarás con el backend para guardar el evento
-        console.log("Evento creado:", newEvent);
+    const handleAddEvent = async (newEvent) => {
+        try {
+            const response = await fetch("http://localhost:8080/api/events", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newEvent),
+            });
 
-        alert("Evento creado: " + newEvent.title);
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
 
-        // Volver al dashboard
-        navigate("/dashboard");
+            const createdEvent = await response.json();
+
+            alert(`Evento creado: ${createdEvent.title}`);
+
+            navigate("/dashboard");
+        } catch (error) {
+            alert("Error al crear evento: " + error.message);
+        }
     };
 
     return (

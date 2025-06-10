@@ -1,13 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EventCard from "../components/EventCard";
 
 export default function Dashboard() {
-    const [events] = useState([
-        { id: 1, title: "Concierto Rock", date: "2025-07-20", description: "Evento musical con bandas locales." },
-        { id: 2, title: "Feria de Tecnología", date: "2025-08-05", description: "Exposición de avances tecnológicos." },
-        { id: 3, title: "Maratón Solidario", date: "2025-09-12", description: "Carrera benéfica en la ciudad." },
-    ]);
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/api/events")
+            .then((res) => {
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                return res.json();
+            })
+            .then((data) => {
+                setEvents(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError("Error al cargar eventos");
+                setLoading(false);
+                console.error(err);
+            });
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen p-8 bg-gray-50">
+                <p>Cargando eventos...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="min-h-screen p-8 bg-gray-50">
+                <p className="text-red-600">{error}</p>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen p-8 bg-gray-50">
