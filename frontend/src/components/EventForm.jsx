@@ -11,13 +11,14 @@ export default function EventForm({ initialData = {}, onSubmit }) {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("Initial data received:", initialData);
         if (Object.keys(initialData).length > 0) {
             setTitle(initialData.title || "");
             setDescription(initialData.description || "");
             setStartDateTime(initialData.startDateTime?.slice(0, 16) || "");
             setEndDateTime(initialData.endDateTime?.slice(0, 16) || "");
             setLocation(initialData.location || "");
-            setCapacity(initialData.maxCapacity || "");
+            setCapacity(initialData.maxCapacity !== undefined ? initialData.maxCapacity.toString() : "");
         }
     }, [initialData]);
 
@@ -35,7 +36,7 @@ export default function EventForm({ initialData = {}, onSubmit }) {
             startDateTime,
             endDateTime,
             location,
-            capacity: parseInt(capacity),
+            maxCapacity: parseInt(capacity),
         });
     };
 

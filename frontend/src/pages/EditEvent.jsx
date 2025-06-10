@@ -22,7 +22,7 @@ export default function EditEvent() {
                     startDateTime: data.startDateTime,
                     endDateTime: data.endDateTime,
                     location: data.location,
-                    capacity: data.maxCapacity,
+                    maxCapacity: data.maxCapacity,
                 });
                 setLoading(false);
             })
@@ -34,6 +34,7 @@ export default function EditEvent() {
     }, [id]);
 
     const handleUpdate = (updatedEvent) => {
+        console.log("Updating event with data:", updatedEvent);
         fetch(`http://localhost:8080/api/events/${id}`, {
             method: "PUT",
             headers: {
