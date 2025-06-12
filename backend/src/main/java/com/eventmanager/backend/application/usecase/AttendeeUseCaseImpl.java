@@ -11,34 +11,35 @@ import java.util.UUID;
 
 @Service
 public class AttendeeUseCaseImpl implements AttendeeUseCase {
-    private final AttendeeRepository repo;
 
-    public AttendeeUseCaseImpl(AttendeeRepository repo) {
-        this.repo = repo;
+    private final AttendeeRepository repository;
+
+    public AttendeeUseCaseImpl(AttendeeRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Attendee create(Attendee attendee) {
-        return repo.save(attendee);
+        return repository.save(attendee);
+    }
+
+    @Override
+    public List<Attendee> getAllByEvent(UUID eventId) {
+        return repository.findAllByEventId(eventId);
+    }
+
+    @Override
+    public Optional<Attendee> getById(UUID attendeeId) {
+        return repository.findById(attendeeId);
     }
 
     @Override
     public Attendee update(Attendee attendee) {
-        return repo.save(attendee);
+        return repository.save(attendee);
     }
 
     @Override
-    public Optional<Attendee> getById(UUID id) {
-        return repo.findById(id);
-    }
-
-    @Override
-    public List<Attendee> getAll() {
-        return repo.findAll();
-    }
-
-    @Override
-    public void delete(UUID id) {
-        repo.deleteById(id);
+    public void delete(UUID attendeeId) {
+        repository.deleteById(attendeeId);
     }
 }

@@ -7,8 +7,9 @@ import java.util.UUID;
 
 public interface AttendeeUseCase {
     Attendee create(Attendee attendee);
+    List<Attendee> getAllByEvent(UUID eventId);
+    Optional<Attendee> getById(UUID attendeeId);
+
     Attendee update(Attendee attendee);
-    Optional<Attendee> getById(UUID id);
-    List<Attendee> getAll();
-    void delete(UUID id);
+    void delete(UUID attendeeId);
 }

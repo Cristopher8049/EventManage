@@ -26,9 +26,13 @@ public class AttendeeEntity {
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    public AttendeeEntity(String name, String email, String phoneNumber) {
+    @Column(name = "event_id",       nullable = false)
+    private UUID eventId;
+
+    public AttendeeEntity(String name, String email, String phoneNumber, UUID eventId) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.eventId = eventId;
     }
 }

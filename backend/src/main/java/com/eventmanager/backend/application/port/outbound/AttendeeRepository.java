@@ -8,6 +8,7 @@ import java.util.UUID;
 public interface AttendeeRepository {
     Attendee save(Attendee attendee);
     Optional<Attendee> findById(UUID id);
+    List<Attendee> findAllByEventId(UUID eventId);
     List<Attendee> findAll();
     void deleteById(UUID id);
 }
