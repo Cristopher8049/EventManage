@@ -7,6 +7,7 @@ import EventDetail from "./pages/EventDetail";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AuthForm from "./pages/AuthForm";
+import AttendeeList from "./pages/AttendeeList";
 
 import "./index.css";
 
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/edit-event/:id" element={<EditEvent />} />
             <Route path="/auth" element={<AuthForm />} />
+            <Route path="/events/:id/attendees" element={<AttendeeList />} />
 
           </Routes>
         </main>
