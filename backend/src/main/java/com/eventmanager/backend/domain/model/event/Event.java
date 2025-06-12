@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Getter
@@ -32,12 +33,33 @@ public class Event {
         this.location = location;
         this.maxCapacity = maxCapacity;
         this.currentAttendees = 0;
-        this.status = EventStatus.ACTIVE;
+        this.status = EventStatus.PENDING;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
 
         validateStartDateNotPast();
         validateStartBeforeEnd();
+        isMondayToFriday(startDateTime, endDateTime);
+    }
+
+    private int daysBetweenDates(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return ( int) ChronoUnit.DAYS.between(startDateTime, endDateTime);
+
+    }
+
+    private void isMondayToFriday(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        int days = daysBetweenDates(startDateTime, startDateTime) + 1;
+        int count =  startDateTime.getDayOfWeek().getValue();
+        for(int i = startDateTime.getDayOfWeek().getValue(); i <= days; i++){
+
+            if(count == 7){
+                count = 0;
+            }
+            if(count >=1 && count <=5 ){
+                setStatus(EventStatus.APPROVED);
+            }
+            count++;
+        }
     }
 
     private void validateStartDateNotPast(){

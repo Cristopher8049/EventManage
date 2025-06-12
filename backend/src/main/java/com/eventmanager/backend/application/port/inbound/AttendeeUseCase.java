@@ -9,7 +9,6 @@ public interface AttendeeUseCase {
     Attendee create(Attendee attendee);
     List<Attendee> getAllByEvent(UUID eventId);
     Optional<Attendee> getById(UUID attendeeId);
-
     Attendee update(Attendee attendee);
     void delete(UUID attendeeId);
 }
