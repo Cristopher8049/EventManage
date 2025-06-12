@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface EventUseCase {
-    Event create(Event event);
-    Event update(Event event);
-    void delete(UUID id);
+public interface EventPort {
+    Event createEvent(Event event);
+    Event updateEvent(Event event);
+    void deleteEvent(UUID id);
     Optional<Event> getById(UUID id);
     List<Event> getAll();
 }

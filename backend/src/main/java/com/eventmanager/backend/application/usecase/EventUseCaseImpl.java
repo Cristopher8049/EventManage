@@ -1,6 +1,6 @@
 package com.eventmanager.backend.application.usecase;
 
-import com.eventmanager.backend.application.port.inbound.EventUseCase;
+import com.eventmanager.backend.application.port.inbound.EventPort;
 import com.eventmanager.backend.application.port.outbound.EventRepository;
 import com.eventmanager.backend.domain.model.event.Event;
 import com.eventmanager.backend.domain.exception.BusinessException;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class EventUseCaseImpl implements EventUseCase {
+public class EventUseCaseImpl implements EventPort {
     private final EventRepository repository;
 
     public EventUseCaseImpl(EventRepository repository) {
@@ -20,7 +20,7 @@ public class EventUseCaseImpl implements EventUseCase {
     }
 
     @Override
-    public Event create(Event event) {
+    public Event createEvent(Event event) {
         repository.findAll().stream()
                 .filter(e -> e.getTitle().equalsIgnoreCase(event.getTitle()))
                 .findAny()
@@ -30,13 +30,13 @@ public class EventUseCaseImpl implements EventUseCase {
     }
 
     @Override
-    public Event update(Event event) {
+    public Event updateEvent(Event event) {
         event.setUpdatedAt(LocalDateTime.now());
         return repository.save(event);
     }
 
     @Override
-    public void delete(UUID id) {
+    public void deleteEvent(UUID id) {
         repository.deleteById(id);
     }
 
