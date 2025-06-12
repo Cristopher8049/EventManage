@@ -1,6 +1,6 @@
 package com.eventmanager.backend.infrastructure.adapter.inbound.rest;
 
-import com.eventmanager.backend.application.port.inbound.EventUseCase;
+import com.eventmanager.backend.application.port.inbound.EventPort;
 import com.eventmanager.backend.domain.model.event.Event;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +11,15 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
-    private final EventUseCase service;
+    private final EventPort service;
 
-    public EventController(EventUseCase service) {
+    public EventController(EventPort service) {
         this.service = service;
     }
 
     @PostMapping
     public ResponseEntity<Event> create(@RequestBody Event event) {
-        Event created = service.create(event);
+        Event created = service.createEvent(event);
         return ResponseEntity.ok(created);
     }
 
@@ -39,13 +39,13 @@ public class EventController {
     @PutMapping("/{id}")
     public ResponseEntity<Event> update(@PathVariable UUID id, @RequestBody Event event) {
         event.setId(id);
-        Event updated = service.update(event);
+        Event updated = service.updateEvent(event);
         return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        service.delete(id);
+        service.deleteEvent(id);
         return ResponseEntity.noContent().build();
     }
 }

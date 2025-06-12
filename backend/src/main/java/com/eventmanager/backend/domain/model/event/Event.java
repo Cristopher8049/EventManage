@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class Event {
     private UUID id;
     private String title;
@@ -26,7 +25,6 @@ public class Event {
     public Event(String title, String description,
                  LocalDateTime startDateTime, LocalDateTime endDateTime,
                  String location, int maxCapacity) {
-        this.id = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.startDateTime = startDateTime;
@@ -37,6 +35,21 @@ public class Event {
         this.status = EventStatus.ACTIVE;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+
+        validateStartDateNotPast();
+        validateStartBeforeEnd();
+    }
+
+    private void validateStartDateNotPast(){
+        if(startDateTime.isBefore(LocalDateTime.now())){
+            throw new IllegalArgumentException("Start date cannot be in the past.");
+        }
+    }
+
+    private void validateStartBeforeEnd(){
+        if(startDateTime.isAfter(endDateTime)){
+            throw new IllegalArgumentException("Start date must be before end date.");
+        }
     }
 
 }
