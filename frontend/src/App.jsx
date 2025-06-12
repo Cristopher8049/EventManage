@@ -6,7 +6,7 @@ import AvailableEvents from "./pages/AvailableEvents";
 import EventDetail from "./pages/EventDetail";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
+import AuthForm from "./pages/AuthForm";
 
 import "./index.css";
 
@@ -15,7 +15,6 @@ import "./index.css";
 function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900 text-white p-6">
-
     </div>
   );
 }
@@ -33,6 +32,8 @@ export default function App() {
             <Route path="/events" element={<AvailableEvents />} />
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/edit-event/:id" element={<EditEvent />} />
+            <Route path="/auth" element={<AuthForm />} />
+
           </Routes>
         </main>
         <Footer />

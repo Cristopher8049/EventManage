@@ -7,8 +7,9 @@ export default function Navbar() {
             <div className="space-x-4">
                 <Link to="/dashboard" className="hover:underline">Dashboard</Link>
                 <Link to="/events" className="hover:underline">Eventos</Link>
-                <Link to="/login" className="hover:underline">Login</Link>
-                <Link to="/register" className="hover:underline">Registro</Link>
+                <Link to="/auth" state={{ mode: "login" }} className="hover:underline">Login</Link>
+                <Link to="/auth" state={{ mode: "register" }} className="hover:underline">Registro</Link>
+
             </div>
         </nav>
     );
