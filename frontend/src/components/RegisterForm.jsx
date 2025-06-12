@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function RegisterForm({ onSuccess }) {
+export default function RegisterForm({ eventId, onSuccess }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhone] = useState("");
@@ -10,7 +10,7 @@ export default function RegisterForm({ onSuccess }) {
         if (!name || !email || !phoneNumber) return alert("Completa todos los campos");
 
         try {
-            await fetch(`http://localhost:8080/api/attendees`, {
+            await fetch(`http://localhost:8080/api/events/${eventId}/attendees`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, phoneNumber }),
